@@ -9,6 +9,7 @@ layout: common
   {%- assign pr_pages = site.pages | where_exp: "page", "page.url contains
   '/pr/'" | sort: "last_published" | reverse -%}
   {%- assign pr_numbers = pr_pages | map: "pr_number" | uniq | compact -%}
+  {%- assign pr_dates = pr_pages | map: "pr_date" -%}
         
   {%- for pr_num in pr_numbers -%}
   <!-- Get PR title -->
