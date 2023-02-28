@@ -46,7 +46,7 @@ release_tags = release_pages | map: 'release_tag' | uniq | compact -%}
 
 <!-- Create header text from each release tag -->
 {%- for r_tag in release_tags -%}
-<summary><h2 class="accordion">{{ r_tag }}</h2></summary>
+<h2 class="accordion">{{ r_tag }}</h2>
 
 <!-- Fixed array of env_descs -->
 {% assign arr_env_desc = 'WP Latest,WP Latest-1,WP Latest-2,PHP 7.4,PHP
