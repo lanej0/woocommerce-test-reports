@@ -17,11 +17,11 @@ layout: common
 
   <!-- Create PR list item using the PR title and number-->
   <tr>
+    <td colspan="3">{{ pr_last_published }}</td>
+  </tr>
+  <tr>
     <td>
-      {{ pr_title_encoded | url_decode }}
-      <a href="https://github.com/woocommerce/woocommerce/pull/{{ pr_num }}"
-        >#{{ pr_num }}
-      </a>
+      <a href="https://github.com/woocommerce/woocommerce/pull/{{ pr_num }}">#{{ pr_num }}</a> {{ pr_title_encoded | url_decode }}
     </td>
       <!-- Get all the test types this PR has -->
       {%- assign pr_test_types = pr_pages_with_this_num | map: "pr_test_type" | sort -%}
