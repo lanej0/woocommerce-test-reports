@@ -5,7 +5,7 @@ layout: common
 
 <p>Test reports are sorted by last updated date.</p>
 <!-- Create list of PR numbers -->
-<ul>
+<table class="table table-dark table-striped">
   {%- assign pr_pages = site.pages | where_exp: "page", "page.url contains
   '/pr/'" | sort: "last_published" | reverse -%}
   {%- assign pr_numbers = pr_pages | map: "pr_number" | uniq | compact -%}
@@ -16,24 +16,25 @@ layout: common
   {%- assign pr_title_encoded = pr_pages_with_this_num[0].pr_title_encoded -%}
 
   <!-- Create PR list item using the PR title and number-->
-  <li>
-    {{ pr_title_encoded | url_decode }}
-    <a href="https://github.com/woocommerce/woocommerce/pull/{{ pr_num }}"
-      >#{{ pr_num }}
-    </a>
-    <ul>
+  <tr>
+    <td>
+      {{ pr_title_encoded | url_decode }}
+      <a href="https://github.com/woocommerce/woocommerce/pull/{{ pr_num }}"
+        >#{{ pr_num }}
+      </a>
+    </td>
       <!-- Get all the test types this PR has -->
       {%- assign pr_test_types = pr_pages_with_this_num | map: "pr_test_type" | sort -%}
 
       <!-- For each test type, create a list item -->
       {%- for test_type in pr_test_types -%}
-      <li>
+      <td>
         <a href="pr/{{ pr_num }}/{{ test_type }}"
           >{{ test_type | upcase }}</a
         >
-      </li>
+      </td>
       {%- endfor -%}
-    </ul>
-  </li>
+    </tr>
   {%- endfor -%}
 </ul>
+</table>
