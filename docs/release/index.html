@@ -72,14 +72,14 @@ release_tags = release_pages | map: 'release_tag' | uniq | compact -%}
         {% assign test_type_page = env_desc_pages | where: 'test_type',
         test_type | first %} {% if test_type_page == null %}
         <!-- If test_type_page doesn't exist yet, print as text only, not a link -->
-        <td width="25%" style="color: gainsboro">
+        <td width="25%"  class="callout-info" style="color: gainsboro">
           {{ test_type | upcase }}
         </td>
         {% else %}
         <!-- Read the 'passed' value -->
         {% assign passed = test_type_page.passed %}
 
-        <td width="25%" class=".callout-info">
+        <td width="25%" class="callout-info">
           <a href="{{ r_tag }}/{{ env_desc_slug }}/{{ test_type }}"
             >{{ test_type | upcase }}</a
           >
