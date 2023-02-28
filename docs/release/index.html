@@ -38,7 +38,6 @@ layout: common
 </details>
 
 <br />
-<br />
 
 <!-- Create list of all release tags, sorted in desc order -->
 {%- assign release_pages = site.pages | where_exp: 'page', "page.url
@@ -58,7 +57,7 @@ release_tags = release_pages | map: 'release_tag' | uniq | compact -%}
 
 <div class="panel">
   <!-- Create table per release tag -->
-  <table>
+  <table class="table table-dark table-striped">
     <tbody>
       {% for env_desc_rdable in arr_env_desc %}
       <tr>
