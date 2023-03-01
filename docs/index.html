@@ -9,24 +9,24 @@ layout: common
   {%- assign pr_pages = site.pages | where_exp: "page", "page.url contains
   '/pr/'" | sort: "last_published" | reverse -%}
   {%- assign pr_numbers = pr_pages | map: "pr_number" | uniq | compact -%}
-  {%- assign prev_date = "Jan 1, 1969" -%}
+  {%- assign prev_date = "Jan 1, 1969" | date: "%b %d, %Y" -%}
         
   {%- for pr_num in pr_numbers -%}
   <!-- Get PR title -->
   {%- assign pr_pages_with_this_num = pr_pages | where: "pr_number", pr_num -%}
   {%- assign pr_title_encoded = pr_pages_with_this_num[0].pr_title_encoded -%}
-  {%- assign pr_date = pr_pages_with_this_num[0].last_published -%}
+  {%- assign pr_date = pr_pages_with_this_num[0].last_published | date: "%b %d, %Y" -%}
   
-  {% if pr_date | date: "%b %d, %Y" == prev_date | date: "%b %d, %Y" %}
+  {% if pr_date == prev_date %}
     <tr>
-      <td colspan="3">{{ pr_date | date: "%b %d, %Y" }} {{ prev_date | date: "%b %d, %Y" }}</td>
+      <td colspan="3">{{ pr_date }} {{ prev_date }}</td>
     </tr>
   {% else %}
     <tr>
-      <td colspan="3">{{ pr_date | date: "%b %d, %Y" }}</td>
+      <td colspan="3">{{ pr_date }}</td>
     </tr>
   {% endif %}
-  {%- assign prev_date = pr_pages_with_this_num[0].last_published -%}
+  {%- assign prev_date = pr_pages_with_this_num[0].last_published | date: "%b %d, %Y" -%}
   
   <!-- Create PR list item using the PR title and number-->
   <tr>
