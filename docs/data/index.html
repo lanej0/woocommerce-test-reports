@@ -3,3 +3,166 @@ title: Test Suite Stats
 layout: common
 ---
 
+<h2>Size of Test Suite</h2>
+
+<canvas id="sizeOfSuite"></canvas>
+
+<script>
+	// Retrieve the JSON data file
+	fetch("https://lanej0.github.io/woocommerce-test-reports/data/size.json")
+		.then(response => response.json())
+		.then(data => {
+			// Extract the data you want to graph
+			const labels = data.map(item => item.label);
+			const values = data.map(item => item.value);
+
+			// Create a new Chart.js chart
+			const ctx = document.getElementById("sizeOfSuite").getContext("2d");
+			const myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [ {
+						label: 'Suite Size',
+						data: values,
+						backgroundColor: 'rgba(255, 99, 132, 0.2)',
+						borderColor: 'rgba(255, 99, 132, 1)',
+						borderWidth: 1
+					} ]
+				},
+				options: {
+					scales: {
+						yAxes: [ {
+							ticks: {
+								beginAtZero: true
+							}
+						} ]
+					}
+				}
+			});
+		})
+		.catch(error => console.error(error));
+</script>
+
+<h2>Execution Time</h2>
+
+<canvas id="executionTime"></canvas>
+
+<script>
+	// Retrieve the JSON data file
+	fetch("https://lanej0.github.io/woocommerce-test-reports/data/time.json")
+		.then(response => response.json())
+		.then(data => {
+			// Extract the data you want to graph
+			const labels = data.map(item => item.label);
+			const values = data.map(item => item.value);
+
+			// Create a new Chart.js chart
+			const ctx = document.getElementById("executionTime").getContext("2d");
+			const myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [ {
+						label: 'Time',
+						data: values,
+						backgroundColor: 'rgba(255, 99, 132, 0.2)',
+						borderColor: 'rgba(255, 99, 132, 1)',
+						borderWidth: 1
+					} ]
+				},
+				options: {
+					scales: {
+						yAxes: [ {
+							ticks: {
+								beginAtZero: true
+							}
+						} ]
+					}
+				}
+			});
+		})
+		.catch(error => console.error(error));
+</script>
+
+<h2>Number of Test Failures</h2>
+
+<canvas id="numberOfFailures"></canvas>
+
+<script>
+	// Retrieve the JSON data file
+	fetch("https://lanej0.github.io/woocommerce-test-reports/data/failures.json")
+		.then(response => response.json())
+		.then(data => {
+			// Extract the data you want to graph
+			const labels = data.map(item => item.label);
+			const values = data.map(item => item.value);
+
+			// Create a new Chart.js chart
+			const ctx = document.getElementById("numberOfFailures").getContext("2d");
+			const myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [ {
+						label: 'Failures',
+						data: values,
+						backgroundColor: 'rgba(255, 99, 132, 0.2)',
+						borderColor: 'rgba(255, 99, 132, 1)',
+						borderWidth: 1
+					} ]
+				},
+				options: {
+					scales: {
+						yAxes: [ {
+							ticks: {
+								beginAtZero: true
+							}
+						} ]
+					}
+				}
+			});
+		})
+		.catch(error => console.error(error));
+</script>
+
+<h2>Number of Flaky Tests</h2>
+
+<canvas id="numberOfFlakes"></canvas>
+
+<script>
+	// Retrieve the JSON data file
+	fetch("https://lanej0.github.io/woocommerce-test-reports/data/flaky.json")
+		.then(response => response.json())
+		.then(data => {
+			// Extract the data you want to graph
+			const labels = data.map(item => item.label);
+			const values = data.map(item => item.value);
+
+			// Create a new Chart.js chart
+			const ctx = document.getElementById("numberOfFlakes").getContext("2d");
+			const myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [ {
+						label: 'Flaky Tests',
+						data: values,
+						backgroundColor: 'rgba(255, 99, 132, 0.2)',
+						borderColor: 'rgba(255, 99, 132, 1)',
+						borderWidth: 1
+					} ]
+				},
+				options: {
+					scales: {
+						yAxes: [ {
+							ticks: {
+								beginAtZero: true
+							}
+						} ]
+					}
+				}
+			});
+		})
+		.catch(error => console.error(error));
+</script>
