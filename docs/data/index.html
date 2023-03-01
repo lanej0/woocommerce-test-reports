@@ -3,61 +3,66 @@ title: Test Suite Stats
 layout: common
 ---
 
-<div class="card" style="width: 45%;">
-	<canvas id="sizeOfSuite" class="card-img-top"></canvas>
-	<div class="card-body">
-		<h5 class="card-title">Size of Test Suite</h5>
-		<p class="card-text">Measures the number of tests executed in each run.</p>
+<div class="row">
+
+	<div class="col-sm-6 mb-3 mb-sm-0">
+		<div class="card" style="width: 45%;">
+			<canvas id="sizeOfSuite" class="card-img-top"></canvas>
+			<div class="card-body">
+				<h5 class="card-title">Size of Test Suite</h5>
+				<p class="card-text">Measures the number of tests executed in each run.</p>
+			</div>
+		</div>
 	</div>
-</div>
 
+	<script>
+		// Retrieve the JSON data file
+		fetch("https://lanej0.github.io/woocommerce-test-reports/data/size.json")
+			.then(response => response.json())
+			.then(data => {
+				// Extract the data you want to graph
+				const labels = data.map(item => item.label);
+				const values = data.map(item => item.value);
 
-<script>
-	// Retrieve the JSON data file
-	fetch("https://lanej0.github.io/woocommerce-test-reports/data/size.json")
-		.then(response => response.json())
-		.then(data => {
-			// Extract the data you want to graph
-			const labels = data.map(item => item.label);
-			const values = data.map(item => item.value);
-
-			// Create a new Chart.js chart
-			const ctx = document.getElementById("sizeOfSuite").getContext("2d");
-			const myChart = new Chart(ctx, {
-				type: 'bar',
-				data: {
-					labels: labels,
-					datasets: [ {
-						label: 'Suite Size',
-						data: values,
-						backgroundColor: 'rgba(255, 99, 132, 0.2)',
-						borderColor: 'rgba(255, 99, 132, 1)',
-						borderWidth: 1
-					} ]
-				},
-				options: {
-					scales: {
-						yAxes: [ {
-							ticks: {
-								beginAtZero: true
-							}
+				// Create a new Chart.js chart
+				const ctx = document.getElementById("sizeOfSuite").getContext("2d");
+				const myChart = new Chart(ctx, {
+					type: 'bar',
+					data: {
+						labels: labels,
+						datasets: [ {
+							label: 'Suite Size',
+							data: values,
+							backgroundColor: 'rgba(255, 99, 132, 0.2)',
+							borderColor: 'rgba(255, 99, 132, 1)',
+							borderWidth: 1
 						} ]
+					},
+					options: {
+						scales: {
+							yAxes: [ {
+								ticks: {
+									beginAtZero: true
+								}
+							} ]
+						}
 					}
-				}
-			});
-		})
-		.catch(error => console.error(error));
-</script>
+				});
+			})
+			.catch(error => console.error(error));
+	</script>
 
-<div class="card" style="width: 45%;">
-	<canvas id="executionTime" class="card-img-top"></canvas>
-	<div class="card-body">
-		<h5 class="card-title">Execution Time</h5>
-		<p class="card-text">The amount of time it takes for the test suite to complete.</p>
+	<div class="col-sm-6">
+		<div class="card" style="width: 45%;">
+			<canvas id="executionTime" class="card-img-top"></canvas>
+			<div class="card-body">
+				<h5 class="card-title">Execution Time</h5>
+				<p class="card-text">The amount of time it takes for the test suite to complete.</p>
+			</div>
+		</div>
 	</div>
-</div>
 
-<script>
+	<script>
 	// Retrieve the JSON data file
 	fetch("https://lanej0.github.io/woocommerce-test-reports/data/time.json")
 		.then(response => response.json())
@@ -93,6 +98,10 @@ layout: common
 		})
 		.catch(error => console.error(error));
 </script>
+	
+</div>
+
+
 
 <h2>Number of Test Failures</h2>
 
