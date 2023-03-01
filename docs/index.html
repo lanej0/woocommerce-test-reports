@@ -17,11 +17,12 @@ layout: common
   {%- assign pr_title_encoded = pr_pages_with_this_num[0].pr_title_encoded -%}
   {%- assign pr_date = pr_pages_with_this_num[0].last_published -%}
   
-  {% unless pr_date == prev_date %}
+  {% if pr_date == prev_date %}
+  {% else %}
     <tr>
       <td colspan="3">{{ pr_date | date: "%b %d, %Y" }}</td>
     </tr>
-  {% endunless %}
+  {% endif %}
   
   {%- assign prev_date = pr_date -%}
   <!-- Create PR list item using the PR title and number-->
