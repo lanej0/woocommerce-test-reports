@@ -25,7 +25,7 @@ layout: common
 
       <!-- For each test type, create a list item -->
       {%- for test_type in pr_test_types -%}
-      {% assign passed = pr_pages_with_this_num.passed %}
+      {% assign passed = pr_test_types.passed %}
       <td>
         <a href="pr/{{ pr_num }}/{{ test_type }}"
           >{{ test_type | upcase }}</a
