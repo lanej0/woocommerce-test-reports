@@ -23,7 +23,7 @@ layout: common
     </tr>
   {% else %}
     <tr>
-      <td colspan="3">{{ pr_date | date: "%b %d, %Y" }}</td>
+      <td colspan="3">{{ pr_date | date: "%b %d, %Y" }} {{ prev_date }}</td>
     </tr>
   {%- assign prev_date = pr_date -%}
   {% endif %}
