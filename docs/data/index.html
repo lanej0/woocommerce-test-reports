@@ -6,7 +6,7 @@ layout: common
 <div class="row">
 
 	<div class="col-sm-6 mb-3 mb-sm-0">
-		<div class="card" style="width: 45%;">
+		<div class="card" style="width: 100%;">
 			<canvas id="sizeOfSuite" class="card-img-top"></canvas>
 			<div class="card-body">
 				<h5 class="card-title">Size of Test Suite</h5>
@@ -53,7 +53,7 @@ layout: common
 	</script>
 
 	<div class="col-sm-6">
-		<div class="card" style="width: 45%;">
+		<div class="card" style="width: 100%;">
 			<canvas id="executionTime" class="card-img-top"></canvas>
 			<div class="card-body">
 				<h5 class="card-title">Execution Time</h5>
@@ -101,11 +101,17 @@ layout: common
 	
 </div>
 
-
-
-<h2>Number of Test Failures</h2>
-
-<canvas id="numberOfFailures"></canvas>
+<div class="row">
+	
+	<div class="col-sm-6 mb-3 mb-sm-0">
+		<div class="card" style="width: 100%;">
+			<canvas id="numberOfFailures" class="card-img-top"></canvas>
+			<div class="card-body">
+				<h5 class="card-title">Number of Failures</h5>
+				<p class="card-text">The number of tests marked as failing each run.</p>
+			</div>
+		</div>
+	</div>
 
 <script>
 	// Retrieve the JSON data file
@@ -144,9 +150,15 @@ layout: common
 		.catch(error => console.error(error));
 </script>
 
-<h2>Number of Flaky Tests</h2>
-
-<canvas id="numberOfFlakes"></canvas>
+<div class="col-sm-6">
+		<div class="card" style="width: 100%;">
+			<canvas id="numberOfFlakes" class="card-img-top"></canvas>
+			<div class="card-body">
+				<h5 class="card-title">Number of Flaky Tests</h5>
+				<p class="card-text">The number of tests marked as flaky each run.</p>
+			</div>
+		</div>
+	</div>
 
 <script>
 	// Retrieve the JSON data file
@@ -184,3 +196,5 @@ layout: common
 		})
 		.catch(error => console.error(error));
 </script>
+
+</div>
