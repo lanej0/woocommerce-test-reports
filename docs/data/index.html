@@ -3,9 +3,14 @@ title: Test Suite Stats
 layout: common
 ---
 
-<h2>Size of Test Suite</h2>
+<div class="card" style="width: 45%;">
+	<canvas id="sizeOfSuite" class="card-img-top"></canvas>
+	<div class="card-body">
+		<h5 class="card-title">Size of Test Suite</h5>
+		<p class="card-text">Measures the number of tests executed in each run.</p>
+	</div>
+</div>
 
-<canvas id="sizeOfSuite"></canvas>
 
 <script>
 	// Retrieve the JSON data file
@@ -44,9 +49,13 @@ layout: common
 		.catch(error => console.error(error));
 </script>
 
-<h2>Execution Time</h2>
-
-<canvas id="executionTime"></canvas>
+<div class="card" style="width: 45%;">
+	<canvas id="executionTime" class="card-img-top"></canvas>
+	<div class="card-body">
+		<h5 class="card-title">Execution Time</h5>
+		<p class="card-text">The amount of time it takes for the test suite to complete.</p>
+	</div>
+</div>
 
 <script>
 	// Retrieve the JSON data file
