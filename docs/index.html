@@ -18,9 +18,6 @@ layout: common
   {%- assign pr_date = pr_pages_with_this_num[0].last_published | date: "%b %d, %Y" -%}
   
   {% if pr_date == prev_date %}
-    <tr>
-      <td colspan="3">{{ pr_date }} {{ prev_date }}</td>
-    </tr>
   {% else %}
     <tr>
       <td colspan="3">{{ pr_date }}</td>
