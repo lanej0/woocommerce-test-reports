@@ -40,9 +40,19 @@ layout: common
 					},
 					options: {
 						scales: {
+							xAxes: [ {
+								title: {
+									display: true,
+									text: 'Month'
+								}
+							} ],
 							yAxes: [ {
 								ticks: {
 									beginAtZero: true
+								},
+								title: {
+									display: true,
+									text: 'Number of Tests'
 								}
 							} ]
 						}
