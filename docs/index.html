@@ -23,7 +23,7 @@ layout: common
       <td colspan="3">{{ pr_date | date: "%b %d, %Y" }}</td>
     </tr>
   {% endif %}
-  {%- assign prev_date = pr_date -%}
+  {%- assign prev_date = pr_pages_with_this_num[0].last_published -%}
   
   <!-- Create PR list item using the PR title and number-->
   <tr>
