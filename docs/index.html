@@ -9,16 +9,21 @@ layout: common
   {%- assign pr_pages = site.pages | where_exp: "page", "page.url contains
   '/pr/'" | sort: "last_published" | reverse -%}
   {%- assign pr_numbers = pr_pages | map: "pr_number" | uniq | compact -%}
+  {%- assign prev_date = "" -%}
         
   {%- for pr_num in pr_numbers -%}
   <!-- Get PR title -->
   {%- assign pr_pages_with_this_num = pr_pages | where: "pr_number", pr_num -%}
   {%- assign pr_title_encoded = pr_pages_with_this_num[0].pr_title_encoded -%}
   {%- assign pr_date = pr_pages_with_this_num[0].last_published -%}
-
-  <tr>
-    <td colspan="3">{{pr_date | date }}</td>
-  </tr>
+  
+  {% unless pr_date == prev_date %}
+    <tr>
+      <td colspan="3">{{ pr_date | date: "%b %d, %Y" }}</td>
+    </tr>
+  {% endunless %}
+  
+  {%- assign prev_date = pr_date -%}
   <!-- Create PR list item using the PR title and number-->
   <tr>
     <td>
