@@ -27,7 +27,7 @@ layout: common
 				// Create a new Chart.js chart
 				const ctx = document.getElementById("sizeOfSuite").getContext("2d");
 				const myChart = new Chart(ctx, {
-					type: 'bar',
+					type: 'line',
 					data: {
 						labels: labels,
 						datasets: [ {
@@ -86,7 +86,7 @@ layout: common
 			// Create a new Chart.js chart
 			const ctx = document.getElementById("executionTime").getContext("2d");
 			const myChart = new Chart(ctx, {
-				type: 'bar',
+				type: 'line',
 				data: {
 					labels: labels,
 					datasets: [ {
