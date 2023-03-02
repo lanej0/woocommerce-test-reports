@@ -98,14 +98,26 @@ layout: common
 					} ]
 				},
 				options: {
-					scales: {
-						yAxes: [ {
-							ticks: {
-								beginAtZero: true
+						scales: {
+							x: {
+								title: {
+									display: true,
+									text: 'Week'
+								}
+							},
+							y: {
+								title: {
+									display: true,
+									text: 'Time (seconds)'
+								}
 							}
-						} ]
+						},
+						plugins: {
+							legend: {
+								display: false
+							}
+						}
 					}
-				}
 			});
 		})
 		.catch(error => console.error(error));
