@@ -8,4 +8,5 @@ last_published: "2023-02-24 09:31:33 +0000"
 commit_sha: 2d3f38851c29784dcd850160f95a5b55029014bb
 commit_message: "Set correct datastore for tests."
 branch_name: fix/36678
+passed: true
 ---

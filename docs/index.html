@@ -9,20 +9,24 @@ layout: common
   {%- assign pr_pages = site.pages | where_exp: "page", "page.url contains
   '/pr/'" | sort: "last_published" | reverse -%}
   {%- assign pr_numbers = pr_pages | map: "pr_number" | uniq | compact -%}
+  <!-- Assign a temporary date value to prev_date -->
   {%- assign prev_date = "Jan 1, 1969" | date: "%b %d, %Y" -%}
         
   {%- for pr_num in pr_numbers -%}
   <!-- Get PR title -->
   {%- assign pr_pages_with_this_num = pr_pages | where: "pr_number", pr_num -%}
   {%- assign pr_title_encoded = pr_pages_with_this_num[0].pr_title_encoded -%}
+  <!-- Grouping PRs by date -- last published date-->
   {%- assign pr_date = pr_pages_with_this_num[0].last_published | date: "%b %d, %Y" -%}
   
+  <!-- If the PR's date is the same as the previous date, don't display a date. -->
   {% if pr_date == prev_date %}
   {% else %}
     <tr>
       <td colspan="3"><div class="alert alert-info">{{ pr_date }}</div></td>
     </tr>
   {% endif %}
+  <!-- Assign the current PR date to the prev_date variable -->
   {%- assign prev_date = pr_pages_with_this_num[0].last_published | date: "%b %d, %Y" -%}
   
   <!-- Create PR list item using the PR title and number-->
@@ -32,13 +36,21 @@ layout: common
     </td>
       <!-- Get all the test types this PR has -->
       {%- assign pr_test_types = pr_pages_with_this_num | map: "pr_test_type" | sort -%}
-
+      {%- assign pr_passed = pr_pages_with_this_num | map: "passed" -%}
+      
       <!-- For each test type, create a list item -->
       {%- for test_type in pr_test_types -%}
       <td>
-        <a href="pr/{{ pr_num }}/{{ test_type }}"
-          >{{ test_type | upcase }}</a
-        >
+        <a href="pr/{{ pr_num }}/{{ test_type }}">{{ test_type | upcase }}</a>
+        &nbsp;
+        <!-- Print emoji based on 'passed' value -->
+        {% case pr_passed %} {% when true %}
+        <!-- green check mark -->
+        &#9989; {% when false %}
+        <!-- red cross mark -->
+        &#10060; {% else %}
+        <!-- question emoji -->
+        &#10068; {% endcase %}
       </td>
       {%- endfor -%}
     </tr>

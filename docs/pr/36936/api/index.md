@@ -8,4 +8,5 @@ last_published: "2023-02-23 16:15:54 +0000"
 commit_sha: e7d41b6f9dbb42e9c725f3579bab55d1c6c81ceb
 commit_message: "Simplify slack alert"
 branch_name: e2e/simplify-slack-message
+passed: true
 ---

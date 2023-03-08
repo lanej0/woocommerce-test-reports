@@ -8,4 +8,5 @@ last_published: "2023-02-24 15:47:13 +0000"
 commit_sha: 08ea9dbf99c7557f6c4215fa119ba61a94cea6c9
 commit_message: "Make WC_Order::get_tax_location public"
 branch_name: add/turn-get-tax-location-public
+passed: true
 ---

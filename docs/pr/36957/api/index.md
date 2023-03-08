@@ -8,4 +8,5 @@ last_published: "2023-02-24 19:16:00 +0000"
 commit_sha: a82f0ce5b1208e5a046abe77f6071a6b14df5e98
 commit_message: "Handle sniff issues"
 branch_name: update/variations-form
+passed: true
 ---
