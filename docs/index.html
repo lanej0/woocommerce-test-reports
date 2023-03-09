@@ -35,10 +35,9 @@ layout: common
       <a href="https://github.com/woocommerce/woocommerce/pull/{{ pr_num }}">#{{ pr_num }}</a> {{ pr_title_encoded | url_decode }}  
     </td>
       <!-- Get all the test types this PR has -->
-      {%- assign pr_test_types = pr_pages_with_this_num | map: "pr_test_type" | sort -%}
-      {%- assign pr_passed_status = pr_pages_with_this_num | map: "passed" | sort: "pr_test_type" -%}
+      {%- assign pr_test_types = pr_pages_with_this_num | map: "pr_test_type, passed" | sort -%}
+      {%- assign pr_passed = pr_pages_with_this_num[0].passed -%}
       Types: {{ pr_test_types }}
-      Passed: {{ pr_passed_status }}
       <!-- For each test type, create a list item -->
       {%- for test_type in pr_test_types -%}
       <td>
