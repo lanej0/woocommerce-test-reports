@@ -4,6 +4,7 @@ layout: common
 ---
 
 <p class="lead">Test reports are sorted by last updated date.</p>
+<p>PR test runs are executed against the latest stable release of WordPress running on PHP 7.4.1.</p>
 <!-- Create list of PR numbers -->
 <table class="table table-dark table-striped">
   {%- assign pr_pages = site.pages | where_exp: "page", "page.url contains
