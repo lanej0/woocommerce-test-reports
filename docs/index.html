@@ -34,10 +34,11 @@ layout: common
     <td>
       <a href="https://github.com/woocommerce/woocommerce/pull/{{ pr_num }}">#{{ pr_num }}</a> {{ pr_title_encoded | url_decode }}  
     </td>
-      <!-- Get all the test types this PR has -->
+      <!-- Get all the test types this PR has (sort changes the order, e2e listed first then api)-->
       {%- assign pr_test_types = pr_pages_with_this_num | map: "pr_test_type" | sort -%}
       <!-- For each test type, create a list item -->
       {%- for test_type in pr_test_types -%}
+      <!-- Assign the pass or fail status. A bit brittle because it assumes tests are listed e2e then api -->
       {% case test_type %}
       {% when "api" %}
         {%- assign pr_passed = pr_pages_with_this_num[1].passed -%}
