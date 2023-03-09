@@ -36,11 +36,10 @@ layout: common
     </td>
       <!-- Get all the test types this PR has -->
       {%- assign pr_test_types = pr_pages_with_this_num | map: "pr_test_type" | sort -%}
-      {%- assign index = 0 -%}
+      {%- assign pr_passed = pr_pages_with_this_num[0].passed -%}
+      {{ pr_pages_with_this_num }}
       <!-- For each test type, create a list item -->
       {%- for test_type in pr_test_types -%}
-      {%- assign pr_passed = pr_pages_with_this_num[0].passed -%}
-      {{ test_type }}
       <td>
         <a href="pr/{{ pr_num }}/{{ test_type }}">{{ test_type | upcase }}</a>
         &nbsp;
@@ -53,6 +52,7 @@ layout: common
         <!-- question emoji -->
         &#10068; {% endcase %}
       </td>
+      {%- endfor -%}
     </tr>
   {%- endfor -%}
 </ul>
