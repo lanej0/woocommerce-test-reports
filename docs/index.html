@@ -40,9 +40,9 @@ layout: common
       {%- for test_type in pr_test_types -%}
       {% case test_type %}
       {% when "api" %}
-        {%- assign pr_passed = pr_pages_with_this_num[0].passed -%}
-      {% else %}
         {%- assign pr_passed = pr_pages_with_this_num[1].passed -%}
+      {% else %}
+        {%- assign pr_passed = pr_pages_with_this_num[0].passed -%}
       {% endcase %}
       <td>
         <a href="pr/{{ pr_num }}/{{ test_type }}">{{ test_type | upcase }}</a>
