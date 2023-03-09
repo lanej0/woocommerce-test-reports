@@ -36,8 +36,9 @@ layout: common
     </td>
       <!-- Get all the test types this PR has -->
       {%- assign pr_test_types = pr_pages_with_this_num | map: "pr_test_type" | sort -%}
-      {%- assign pr_passed = pr_pages_with_this_num[0].passed -%}
+      {%- assign pr_passed = pr_pages_with_this_num | map: "passed" | sort -%}
       {{ pr_test_types }}
+      {{ pr_passed }}
       <!-- For each test type, create a list item -->
       {%- for test_type in pr_test_types -%}
       <td>
