@@ -56,12 +56,12 @@ release_tags = release_pages | map: 'release_tag' | uniq | compact -%}
     <div id="{{r_tag}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionReleases">
       <div class="accordion-body">
         <!-- Fixed array of env_descs -->
-        {% assign arr_env_desc = 'WP Latest <span class="badge rounded-pill text-bg-info">PHP 8 - Host: Bluehost - Theme: 2019</span>,
-                                  WP Latest-1 <span class="badge rounded-pill text-bg-info">PHP 7.4 - Host: Localhost - Theme: 2019</span>,
-                                  WP Latest-2 <span class="badge rounded-pill text-bg-info">PHP 7.4 - Host: Localhost - Theme: 2019</span>,
-                                  PHP 7.4 <span class="badge rounded-pill text-bg-info">PHP 7.4 - Host: Localhost - Theme: 2019</span>,
-                                  PHP 8.0 <span class="badge rounded-pill text-bg-info">PHP 8 - Host: Localhost - Theme: 2019</span>,
-                                  PHP 8.1 <span class="badge rounded-pill text-bg-info">PHP 8.1 - Host: Localhost - Theme: 2019</span>' | split: ',' %}
+        {% assign arr_env_desc = 'WP Latest <span class="badge text-bg-info">PHP 8</span> <span class="badge text-bg-info">Bluehost</span> <span class="badge text-bg-info">Theme: 2019</span>,
+                                  WP Latest-1 <span class="badge text-bg-info">PHP 7.4</span> <span class="badge text-bg-info">Localhost/wp-env</span> <span class="badge text-bg-info">Theme: 2019</span>,
+                                  WP Latest-2 <span class="badge text-bg-info">PHP 7.4</span> <span class="badge text-bg-info">Localhost/wp-env</span> <span class="badge text-bg-info">Theme: 2019</span>,
+                                  PHP 7.4 <span class="badge text-bg-info">PHP 7.4</span> <span class="badge text-bg-info">Localhost/wp-env</span> <span class="badge text-bg-info">Theme: 2019</span>,
+                                  PHP 8.0 <span class="badge text-bg-info">PHP 8</span> <span class="badge text-bg-info">Localhost/wp-env</span> <span class="badge text-bg-info">Theme: 2019</span>,
+                                  PHP 8.1 <span class="badge text-bg-info">PHP 8.1</span> <span class="badge text-bg-info">Localhost/wp-env</span> <span class="badge text-bg-info">Theme: 2019</span>' | split: ',' %}
 
         <!-- Fixed array of test types -->
         {% assign arr_test_types = 'api,e2e' | split: ',' %}
