@@ -7,19 +7,122 @@ layout: common
 
 	<div class="col-sm-6 mb-3 mb-sm-0">
 		<div class="card" style="width: 100%;">
-			<iframe
-				src="https://woosolaris.grafana.net/d-solo/a81ad72d-7baa-45d9-a157-2526f9ff3226/test-automation-reporting?orgId=1&from=1684334856742&to=1684356456742&panelId=1"
-				width="450" height="200" frameborder="0"></iframe>
+
+			<canvas id="sizeOfSuite" class="card-img-top"></canvas>
+			<div class="card-body">
+				<h5 class="card-title">Size of Test Suite</h5>
+				<p class="card-text">Measures the number of tests executed in each run.</p>
+			</div>
 		</div>
 	</div>
 
+	<script>
+		// Retrieve the JSON data file
+		fetch("https://lanej0.github.io/woocommerce-test-reports/data/size.json")
+			.then(response => response.json())
+			.then(data => {
+				// Extract the data you want to graph
+				const labels = data.map(item => item.label);
+				const values = data.map(item => item.value);
+
+				// Create a new Chart.js chart
+				const ctx = document.getElementById("sizeOfSuite").getContext("2d");
+				const myChart = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: labels,
+						datasets: [ {
+							label: 'Suite Size',
+							data: values,
+							backgroundColor: '#6ea8fe',
+							borderColor: '#3f6399',
+							borderWidth: 1
+						} ]
+					},
+					options: {
+						scales: {
+							x: {
+								title: {
+									display: true,
+									text: 'Month'
+								}
+							},
+							y: {
+								title: {
+									display: true,
+									text: 'Number of Tests'
+								}
+							}
+						},
+						plugins: {
+							legend: {
+								display: false
+							}
+						}
+					}
+				});
+			})
+			.catch(error => console.error(error));
+	</script>
 
 	<div class="col-sm-6">
 		<div class="card" style="width: 100%;">
-
+			<canvas id="executionTime" class="card-img-top"></canvas>
+			<div class="card-body">
+				<h5 class="card-title">Execution Time</h5>
+				<p class="card-text">The amount of time it takes for the test suite to complete.</p>
+			</div>
 		</div>
 	</div>
 
+	<script>
+	// Retrieve the JSON data file
+	fetch("https://lanej0.github.io/woocommerce-test-reports/data/time.json")
+		.then(response => response.json())
+		.then(data => {
+			// Extract the data you want to graph
+			const labels = data.map(item => item.label);
+			const values = data.map(item => item.value);
+
+			// Create a new Chart.js chart
+			const ctx = document.getElementById("executionTime").getContext("2d");
+			const myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: labels,
+					datasets: [ {
+						label: 'Time',
+						data: values,
+						backgroundColor: '#6ea8fe',
+						borderColor: '#3f6399',
+						borderWidth: 1
+					} ]
+				},
+				options: {
+						scales: {
+							x: {
+								title: {
+									display: true,
+									text: 'Week'
+								}
+							},
+							y: {
+								title: {
+									display: true,
+									text: 'Time (seconds)'
+								}
+							}
+						},
+						plugins: {
+							legend: {
+								display: false
+							}
+						}
+					}
+			});
+		})
+		.catch(error => console.error(error));
+</script>
 	
 </div>
 
@@ -29,15 +132,96 @@ layout: common
 	
 	<div class="col-sm-6 mb-3 mb-sm-0">
 		<div class="card" style="width: 100%;">
-
+			<canvas id="numberOfFailures" class="card-img-top"></canvas>
+			<div class="card-body">
+				<h5 class="card-title">Number of Failures</h5>
+				<p class="card-text">The number of tests marked as failing each run.</p>
+			</div>
 		</div>
 	</div>
 
+<script>
+	// Retrieve the JSON data file
+	fetch("https://lanej0.github.io/woocommerce-test-reports/data/failures.json")
+		.then(response => response.json())
+		.then(data => {
+			// Extract the data you want to graph
+			const labels = data.map(item => item.label);
+			const values = data.map(item => item.value);
+
+			// Create a new Chart.js chart
+			const ctx = document.getElementById("numberOfFailures").getContext("2d");
+			const myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [ {
+						label: 'Failures',
+						data: values,
+						backgroundColor: '#6ea8fe',
+						borderColor: '#3f6399',
+						borderWidth: 1
+					} ]
+				},
+				options: {
+					scales: {
+						yAxes: [ {
+							ticks: {
+								beginAtZero: true
+							}
+						} ]
+					}
+				}
+			});
+		})
+		.catch(error => console.error(error));
+</script>
 
 <div class="col-sm-6">
 		<div class="card" style="width: 100%;">
-
+			<canvas id="numberOfFlakes" class="card-img-top"></canvas>
+			<div class="card-body">
+				<h5 class="card-title">Number of Flaky Tests</h5>
+				<p class="card-text">The number of tests marked as flaky each run.</p>
+			</div>
 		</div>
 	</div>
+
+<script>
+	// Retrieve the JSON data file
+	fetch("https://lanej0.github.io/woocommerce-test-reports/data/flaky.json")
+		.then(response => response.json())
+		.then(data => {
+			// Extract the data you want to graph
+			const labels = data.map(item => item.label);
+			const values = data.map(item => item.value);
+
+			// Create a new Chart.js chart
+			const ctx = document.getElementById("numberOfFlakes").getContext("2d");
+			const myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [ {
+						label: 'Flaky Tests',
+						data: values,
+						backgroundColor: '#6ea8fe',
+						borderColor: '#3f6399',
+						borderWidth: 1
+					} ]
+				},
+				options: {
+					scales: {
+						yAxes: [ {
+							ticks: {
+								beginAtZero: true
+							}
+						} ]
+					}
+				}
+			});
+		})
+		.catch(error => console.error(error));
+</script>
 
 </div>
