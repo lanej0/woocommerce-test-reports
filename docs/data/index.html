@@ -21,17 +21,15 @@ layout: common
 	<script>
 		// Load the Google Charts library and the Google Sheets API
 			google.charts.load('current', { 'packages': [ 'corechart' ] });
-			google.charts.setOnLoadCallback(drawChart);
+			google.charts.setOnLoadCallback(getData);
 		
-		// Callback function to draw the chart
-			function drawChart() {
+			function getData() {
 				// Define the query using the GViz Query Language
 				var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1UjaaOCSGNLWW5hYdtw52P5s_PTBWexHW4_CmwHwvCps/gviz/tq?gid=0&headers=1');
-
 				// Send the query to Google Sheets API and handle the response
 				query.send(handleQueryResponse);
 			}
-
+			
 			// Callback function to handle the query response
 			function handleQueryResponse(response) {
 				if (response.isError()) {
@@ -41,19 +39,14 @@ layout: common
 
 				// Get the data table from the query response
 				var dataTable = response.getDataTable();
-				var jsonData = dataTable.toJSON();
-				
-				console.log(jsonData);
-
-				// Extract the labels and data from the JSON
-				var labels = jsonData.rows.map(function (row) {
-					return row.c[ 0 ].f;
-				});
-				console.log(labels);
-
-				var data = jsonData.rows.map(function (row) {
-					return row.c[ 1 ].f;
-				});
+				// Extract the labels and data from the DataTable
+				var labels = [];
+				var data = [];
+				var numRows = dataTable.getNumberOfRows();
+				for (var i = 0; i < numRows; i++) {
+					labels.push(dataTable.getFormattedValue(i, 0));
+					data.push(dataTable.getFormattedValue(i, 1));
+				}
 
 				// Render the chart using Chart.js
 				var ctx = document.getElementById('sizeOfSuite').getContext('2d');
@@ -73,13 +66,18 @@ layout: common
 						responsive: true,
 						scales: {
 							y: {
-								beginAtZero: true
+								min: 180,
+								beginAtZero: false
+							}
+						},
+						plugins: {
+							legend: {
+								display: false // Hide the legend
 							}
 						}
 					}
 			});
 		}
-
 	</script>
 
 	<div class="col-sm-6">
