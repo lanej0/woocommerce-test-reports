@@ -2,6 +2,10 @@
 title: Test Suite Stats
 layout: common
 ---
+<!-- Google API library -->
+<script src="https://apis.google.com/js/api.js"></script>
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
 
 <div class="row">
 
@@ -15,54 +19,68 @@ layout: common
 			</div>
 		</div>
 	</div>
-
+	
 	<script>
-		// Retrieve the JSON data file
-		fetch("https://lanej0.github.io/woocommerce-test-reports/data/size.json")
-			.then(response => response.json())
-			.then(data => {
-				// Extract the data you want to graph
-				const labels = data.map(item => item.label);
-				const values = data.map(item => item.value);
+		// Load the Google Sheets API library
+			gapi.load('client', start);
+			const CLIENT_ID = '116224303344731245781';
+			const API_KEY = '47aa79d14a35c3c355f054ccd2a94230e5a05032';
+			const SPREADSHEET_ID = '1UjaaOCSGNLWW5hYdtw52P5s_PTBWexHW4_CmwHwvCps';
+			const RANGE = 'Size of Test Suite:!A:B';
 
-				// Create a new Chart.js chart
-				const ctx = document.getElementById("sizeOfSuite").getContext("2d");
-				const myChart = new Chart(ctx, {
-					type: 'line',
-					data: {
-						labels: labels,
-						datasets: [ {
-							label: 'Suite Size',
-							data: values,
-							backgroundColor: '#6ea8fe',
-							borderColor: '#3f6399',
-							borderWidth: 1
-						} ]
-					},
-					options: {
-						scales: {
-							x: {
-								title: {
-									display: true,
-									text: 'Month'
-								}
-							},
-							y: {
-								title: {
-									display: true,
-									text: 'Number of Tests'
-								}
-							}
+			// Load the API client and authorize the client
+			function start() {
+				gapi.client.init({
+					'apiKey': API_KEY,
+					'clientId': CLIENT_ID,
+					'scope': 'https://www.googleapis.com/auth/spreadsheets.readonly',
+					'discoveryDocs': [ 'https://sheets.googleapis.com/$discovery/rest?version=v4' ],
+				}).then(function () {
+					// Fetch the data from the Google Sheet
+					return gapi.client.sheets.spreadsheets.values.get({
+						spreadsheetId: SPREADSHEET_ID,
+						range: RANGE
+					});
+				}).then(function (response) {
+					var values = response.result.values;
+
+					// Extract the data from the response
+					var labels = values.map(function (row) {
+						return row[ 0 ];
+					});
+
+					var data = values.map(function (row) {
+						return parseInt(row[ 1 ]);
+					});
+
+					// Render the chart using Chart.js
+					var ctx = document.getElementById('sizeOfSuite').getContext('2d');
+					new Chart(ctx, {
+						type: 'bar',
+						data: {
+							labels: labels,
+							datasets: [ {
+								label: 'Data',
+								data: data,
+								backgroundColor: 'rgba(75, 192, 192, 0.2)',
+								borderColor: 'rgba(75, 192, 192, 1)',
+								borderWidth: 1
+							} ]
 						},
-						plugins: {
-							legend: {
-								display: false
+						options: {
+							responsive: true,
+							scales: {
+								y: {
+									beginAtZero: true
+								}
 							}
 						}
-					}
+					});
+				}, function (error) {
+					console.error('Error loading Google Sheets API:', error);
 				});
-			})
-			.catch(error => console.error(error));
+			}
+
 	</script>
 
 	<div class="col-sm-6">
@@ -74,56 +92,6 @@ layout: common
 			</div>
 		</div>
 	</div>
-
-	<script>
-	// Retrieve the JSON data file
-	fetch("https://lanej0.github.io/woocommerce-test-reports/data/time.json")
-		.then(response => response.json())
-		.then(data => {
-			// Extract the data you want to graph
-			const labels = data.map(item => item.label);
-			const values = data.map(item => item.value);
-
-			// Create a new Chart.js chart
-			const ctx = document.getElementById("executionTime").getContext("2d");
-			const myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: labels,
-					datasets: [ {
-						label: 'Time',
-						data: values,
-						backgroundColor: '#6ea8fe',
-						borderColor: '#3f6399',
-						borderWidth: 1
-					} ]
-				},
-				options: {
-						scales: {
-							x: {
-								title: {
-									display: true,
-									text: 'Week'
-								}
-							},
-							y: {
-								title: {
-									display: true,
-									text: 'Time (seconds)'
-								}
-							}
-						},
-						plugins: {
-							legend: {
-								display: false
-							}
-						}
-					}
-			});
-		})
-		.catch(error => console.error(error));
-</script>
-	
 </div>
 
 <hr />
@@ -140,42 +108,6 @@ layout: common
 		</div>
 	</div>
 
-<script>
-	// Retrieve the JSON data file
-	fetch("https://lanej0.github.io/woocommerce-test-reports/data/failures.json")
-		.then(response => response.json())
-		.then(data => {
-			// Extract the data you want to graph
-			const labels = data.map(item => item.label);
-			const values = data.map(item => item.value);
-
-			// Create a new Chart.js chart
-			const ctx = document.getElementById("numberOfFailures").getContext("2d");
-			const myChart = new Chart(ctx, {
-				type: 'bar',
-				data: {
-					labels: labels,
-					datasets: [ {
-						label: 'Failures',
-						data: values,
-						backgroundColor: '#6ea8fe',
-						borderColor: '#3f6399',
-						borderWidth: 1
-					} ]
-				},
-				options: {
-					scales: {
-						yAxes: [ {
-							ticks: {
-								beginAtZero: true
-							}
-						} ]
-					}
-				}
-			});
-		})
-		.catch(error => console.error(error));
-</script>
 
 <div class="col-sm-6">
 		<div class="card" style="width: 100%;">
@@ -186,42 +118,5 @@ layout: common
 			</div>
 		</div>
 	</div>
-
-<script>
-	// Retrieve the JSON data file
-	fetch("https://lanej0.github.io/woocommerce-test-reports/data/flaky.json")
-		.then(response => response.json())
-		.then(data => {
-			// Extract the data you want to graph
-			const labels = data.map(item => item.label);
-			const values = data.map(item => item.value);
-
-			// Create a new Chart.js chart
-			const ctx = document.getElementById("numberOfFlakes").getContext("2d");
-			const myChart = new Chart(ctx, {
-				type: 'bar',
-				data: {
-					labels: labels,
-					datasets: [ {
-						label: 'Flaky Tests',
-						data: values,
-						backgroundColor: '#6ea8fe',
-						borderColor: '#3f6399',
-						borderWidth: 1
-					} ]
-				},
-				options: {
-					scales: {
-						yAxes: [ {
-							ticks: {
-								beginAtZero: true
-							}
-						} ]
-					}
-				}
-			});
-		})
-		.catch(error => console.error(error));
-</script>
 
 </div>
