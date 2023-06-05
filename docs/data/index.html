@@ -45,7 +45,7 @@ layout: common
 
 <div class="col-sm-6">
 		<div class="card" style="width: 100%;">
-			<canvas id="numberOfFlakes" class="card-img-top"></canvas>
+			<canvas id="numberOfSkipped" class="card-img-top"></canvas>
 			<div class="card-body">
 				<h5 class="card-title">Number of Skipped Tests</h5>
 				<p class="card-text">The number of tests we skip each run.</p>
@@ -202,9 +202,9 @@ layout: common
 				}
 
 				// Render the chart using Chart.js
-				var ctx = document.getElementById('executionTime').getContext('2d');
+				var ctx = document.getElementById('numberOfFailures').getContext('2d');
 				new Chart(ctx, {
-					type: 'line',
+					type: 'bar',
 					data: {
 						labels: labels,
 						datasets: [ {
@@ -260,9 +260,9 @@ layout: common
 			}
 
 			// Render the chart using Chart.js
-			var ctx = document.getElementById('executionTime').getContext('2d');
+			var ctx = document.getElementById('numberOfSkipped').getContext('2d');
 			new Chart(ctx, {
-				type: 'line',
+				type: 'bar',
 				data: {
 					labels: labels,
 					datasets: [ {
