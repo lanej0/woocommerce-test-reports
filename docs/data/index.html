@@ -89,7 +89,7 @@ layout: common
 			// Render the chart using Chart.js
 			var ctx = document.getElementById('sizeOfSuite').getContext('2d');
 			new Chart(ctx, {
-				type: 'line',
+				type: 'bar',
 				data: {
 					labels: labels,
 					datasets: [ {
@@ -239,7 +239,14 @@ layout: common
 						scales: {
 							y: {
 								min: 0,
-								beginAtZero: true
+								beginAtZero: true,
+								ticks: {
+									stepSize: 1,
+									callback: function (value, index, values) {
+										// Convert the tick value to an integer
+										return Math.floor(value);
+									}
+								}
 							}
 						},
 						plugins: {
