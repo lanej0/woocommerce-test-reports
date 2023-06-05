@@ -4,6 +4,7 @@ layout: common
 ---
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline"></script>
 
 <div class="row">
 
@@ -154,7 +155,12 @@ layout: common
 						data: data,
 						backgroundColor: 'rgba(75, 192, 192, 0.2)',
 						borderColor: 'rgba(75, 192, 192, 1)',
-						borderWidth: 1
+						borderWidth: 1,
+						trendlineLinear: {
+							style: 'rgb(43 ,66 ,255, 0.3)',
+							lineStyle: 'dotted',
+							width: 2
+						}
 					} ]
 				},
 				options: {
